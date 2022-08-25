@@ -3,16 +3,24 @@ module.exports = {
     title: `株式会社スパイス`,
     description: `株式会社スパイスは、広島を拠点としてマーケティング・コンサルティングを得意とし、集客に強いサイト制作まで一貫して行います`,
     author: `spice Inc.`,
-    siteUrl: `https://spice-web.jp`,
+    siteUrl: `https://sparkly-pegasus-a28a8c.netlify.app`,
   },
   plugins: [
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://spice-web.jp`,
+        siteUrl: `https://sparkly-pegasus-a28a8c.netlify.app`,
         stripQueryString: true,
       },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: `https://sparkly-pegasus-a28a8c.netlify.app`,
+        sitemap: `https://sparkly-pegasus-a28a8c.netlify.app/sitemap/sitemap-index.xml`,
+        policy: [{ userAgent: `*`, allow:`/`}]
+      }
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
