@@ -1,9 +1,13 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+// add
+import { Container } from "react-bootstrap";
+
 
 import Navbar from "./navbar"
 import "./layout.scss"
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -20,7 +24,7 @@ const Layout = ({ children }) => {
     <div className="container-fluid p-0">
       <Navbar siteTitle={data.site.siteMetadata?.title || `Title`} />
       <main>
-        {children}
+        <Container className="justify-content-md-center">{children}</Container>
       </main>
     </div>
   )

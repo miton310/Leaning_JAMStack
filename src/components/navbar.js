@@ -33,7 +33,28 @@ const Navbar = ({ siteTitle }) => {
               <ExactNavLink
                 to="/about"
               >
-                About
+                会社概要
+              </ExactNavLink>
+            </li>
+            <li className="nav-item">
+              <ExactNavLink
+                to="/jigyo"
+              >
+                事業内容
+              </ExactNavLink>
+            </li>
+            <li className="nav-item">
+              <ExactNavLink
+                to="/information"
+              >
+                インフォメーション
+              </ExactNavLink>
+            </li>
+            <li className="nav-item">
+              <ExactNavLink
+                to="/contact"
+              >
+                お問い合わせ
               </ExactNavLink>
             </li>
           </ul>

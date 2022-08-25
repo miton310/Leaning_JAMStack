@@ -1,35 +1,117 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Row, Col, Card } from "react-bootstrap";
+
+import { graphql, Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+
+import homeImg from "../images/home.jpg"
+import jigyo1Img from "../images/jigyo1.jpg"
+import jigyo2Img from "../images/jigyo2.jpg"
+import jigyo3Img from "../images/jigyo3.jpg"
+
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const IndexPage = () => (
+
+const IndexPage = ( {data}) => (
   <Layout>
     <Seo title="Home" />
-    <section className="py-5 text-center container">
-      <div className="row py-lg-5">
-        <div className="col-lg-6 col-md-8 mx-auto">
-          <h1 className="fw-light">Hello world ! </h1>
-          <p className="lead text-muted"> Welcome to this Boostrap 5 Gatsby Starter</p>
-          <StaticImage
-            src="../images/gatsby-astronaut.png"
-            width={300}
-            quality={95}
-            formats={["AUTO", "WEBP"]}
-            alt="A Gatsby astronaut"
-            className="img-fluid"
-          />
+    <Row style={{maxWidth: `960px`}}>
+      <img src={homeImg} style={{width:`100%`,marginBottom:`2rem`}} />
+    </Row>
+    <Row>
+      <Col xs={12} md={6} style={{maxWidth:`480px`}}>
+        <Row>
+          <Col style={{backgroundColor:`cornflowerblue`, color:`white`, padding:`0.5em`}}>インフォメーション</Col>
+        </Row>
+        {data.allMarkdownRemark.edges.map(({ node }) => (
+          <Row>
+            <Col style={{ padding:`0.5rem` }}>
+              <Link to={`${node.fields.slug}`}>
+                {node.frontmatter.date} 記事 {`   `} {node.frontmatter.title}
+              </Link>
+            </Col>
+          </Row>
+        ))}
+      </Col>{/* left column */}
 
-        </div>
-      </div>
-      <div className="row">
-        <Link to="/about/" className="btn btn-primary my-2">About</Link>
-        <Link to="/page-2/" className="btn btn-secondary my-2">Go to page 2</Link>
-      </div>
-    </section>
+      <Col xs={12} md={6} style={{maxWidth:`480px`}}>
+        <Row>
+          <Col style={{backgroundColor:`cornflowerblue`, color:`white`, padding:`0.5rem`}}>IR情報</Col>
+        </Row>
+        <Row>
+          <Col style={{padding:`0.5rem`}}>決算報告</Col>
+        </Row>
+        <Row>
+        <Col style={{padding:`0.5rem`}}>社長挨拶(動画)</Col>
+        </Row>
+        <Row>
+        <Col style={{padding:`0.5rem`}}>広告スペース</Col>
+        </Row>
+        <Row>
+          <Col style={{padding:`0.5rem`}}>広告スペース</Col>
+        </Row>
+      </Col>{/* right column */}
+    </Row>
+
+    <Row>
+      <Col style={{backgroundColor:`cornflowerblue`,color:`white`,padding:`0.5rem`,maxWidth:`960px`,marginTop:`2rem`}}>事業内容</Col>
+    </Row>
+    <Row>
+      <Col style={{maxWidth:`960px`}}>
+        <Row>
+          <Col xs={6} md={4}>
+            <Card style={{marginTop:`1rem`}}>
+              <Card.Img variant="top" src={jigyo1Img} alt={`軌道上デブリ除去`} />
+              <Card.Body>
+                <Card.Title style={{fontSize:`1rem`}}>軌道上デブリ除去</Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={6} md={4}>
+            <Card style={{marginTop:`1rem`}}>
+              <Card.Img variant="top" src={jigyo2Img} alt={`テレポーテーションゲート開設`} />
+              <Card.Body>
+                <Card.Title style={{fontSize:`1rem`}}>テレポーテーションゲート開設</Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={6} md={4}>
+            <Card style={{marginTop:`1rem`}}>
+              <Card.Img variant="top" src={jigyo3Img} alt={`業子力学による量子コントロール`} />
+              <Card.Body>
+                <Card.Title style={{fontSize:`1rem`}}>業子力学による量子コントロール</Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+    <Row>
+      <Col style={{maxWidth:`960px`, paddingTop:`3rem`}}></Col>
+    </Row>
+
   </Layout>
-)
+);
 
-export default IndexPage
+export default IndexPage;
+
+export const query = graphql`
+  query {
+    allMarkdownRemark (
+      limit: 4, sort: {fields: [frontmatter___date], order:DESC}) {
+        edges {
+          node {
+            frontmatter {
+              title
+              date(formatString: "YYY年MM月DD日")
+            }
+            fields {
+              slug
+            }
+          }
+        }
+      }
+  }
+`
