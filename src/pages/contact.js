@@ -22,7 +22,8 @@ const ContactPage = () => (
       <Row>
         <Col>
         <p>（※このサンプルサイトで送信機能は使用できません）</p>
-        <Form>
+        <Form method="post" name="contact" method="post" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
           <Form.Group controlId="formBasicText">
             <Form.Control type="text" as="input" placeholder="お名前" name="name" required />
           </Form.Group>
@@ -32,9 +33,9 @@ const ContactPage = () => (
           <Form.Group controlId="formTextarea">
             <Form.Control as="textarea" placeholder="メッセージ" rows="3" name="message" required />
           </Form.Group>
-          {/* <Form.Group>
-            <Form.File id="FormControlFile" name="file" lang="ja" label="ファイル添付" />
-          </Form.Group> */}
+          <Form.Group>
+            <Form.Control type="file" id="FormControlFile" name="file" lang="ja" label="ファイル添付" />
+          </Form.Group>
           <Button variant="light" type="submit">送信</Button>
         </Form>
         </Col>
