@@ -1,10 +1,19 @@
 module.exports = {
   siteMetadata: {
     title: `株式会社スパイス`,
-    description: `A simple bootstrap 5 and Sass starter for Gatsby. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@r-ichard`,
+    description: `株式会社スパイスは、広島を拠点としてマーケティング・コンサルティングを得意とし、集客に強いサイト制作まで一貫して行います`,
+    author: `spice Inc.`,
+    siteUrl: `https://spice-web.jp`,
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://spice-web.jp`,
+        stripQueryString: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
